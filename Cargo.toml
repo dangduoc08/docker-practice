@@ -1,0 +1,10 @@
+[package]
+authors = ["Đăng Được <duoc200894@gmail.com>"]
+edition = "2018"
+name = "docker_practice"
+version = "0.1.0"
+
+[dependencies]
+amiquip = {version = "0.4", default-features = false}
+postgres = "0.19.1"
+redis = "0.21.0"
