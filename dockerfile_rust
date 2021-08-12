@@ -1,0 +1,10 @@
+FROM rust:latest
+
+WORKDIR tmp/rust
+
+COPY . .
+
+RUN rm Cargo.lock
+
+CMD ["cargo run"]
+
