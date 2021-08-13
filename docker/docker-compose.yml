@@ -57,7 +57,7 @@ services:
       network-custom:
     volumes:
       - type: bind
-        source: $HOST/c/quynh/test
+        source: ../test
         target: /tmp/rust_2
 
 
