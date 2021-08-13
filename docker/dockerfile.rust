@@ -1,7 +1,0 @@
-FROM rust:latest
-
-WORKDIR /tmp/rust
-
-COPY . .
-
-CMD ["cargo run"]
