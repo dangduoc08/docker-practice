@@ -5,40 +5,54 @@ services:
   postgres:
     build: 
       context: .
-      dockerfile: dockerfile_postgre
-    ports: 
-      - "5432:5432"
+      dockerfile: dockerfile.postgre
     environment: 
-      - POSTGRES_PASSWORD=test1234
-      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=abc123
+      - POSTGRES_USER=user
+    networks: 
+      network-custom:
+        aliases: 
+        - postgresal
 
   redis:
     build:
       context: .
-      dockerfile: dockerfile_redis
-    ports: 
-      - "6379:6379"
+      dockerfile: dockerfile.redis
     depends_on: 
       - postgres
+    networks: 
+      network-custom:
+        aliases: 
+        - redisal
 
   rabbitmq:
     build:
       context: .
-      dockerfile: dockerfile_rabbitmq
-    ports: 
-      - "5672:5672"
-      - "15672:15672"
+      dockerfile: dockerfile.rabbitmq
     depends_on: 
       - postgres
       - redis
+    networks: 
+      network-custom:
+        aliases: 
+        - rabbitmqal
 
   rust:
     build:
       context: ../
-      dockerfile: dockerfile_rust
-    network_mode: "host"
+      dockerfile: dockerfile.rust
     depends_on: 
       - postgres
       - redis
       - rabbitmq
     command: cargo run
+    networks: 
+      network-custom:
+    volumes:
+      - type: bind
+        source: ../tmp/config.rs
+        target: /tmp/rust/src/config.rs
+
+
+networks:
+  network-custom:
