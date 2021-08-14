@@ -6,8 +6,8 @@ services:
     build: 
       context: .
       dockerfile: dockerfile.postgre
-    ports: 
-      - "5432:5432"
+    # ports: 
+      # - "5432:5432"
     environment: 
       - POSTGRES_PASSWORD=test1234
       - POSTGRES_USER=postgres
@@ -20,8 +20,8 @@ services:
     build:
       context: .
       dockerfile: dockerfile.redis
-    ports: 
-      - "6379:6379"
+    # ports: 
+      # - "6379:6379"
     depends_on: 
       - postgres
     networks: 
@@ -33,9 +33,9 @@ services:
     build:
       context: .
       dockerfile: dockerfile.rabbitmq
-    ports: 
-      - "5672:5672"
-      - "15672:15672"
+    # ports: 
+      # - "5672:5672"
+      # - "15672:15672"
     depends_on: 
       - postgres
       - redis
@@ -57,8 +57,8 @@ services:
       network-custom:
     volumes:
       - type: bind
-        source: ../test
-        target: /tmp/rust_2
+        source: ../src/config.rs
+        target: /tmp/rust/config.rs
 
 
 networks:
