@@ -28,7 +28,7 @@ fn main() {
   join_handlers.push(psql_join);
 
   let redis_join = thread::spawn(|| {
-    let redis_url: String = format!("redis://{}:6379", config::REDIS_HOST);
+    let redis_url: String = format!("redis://{}", config::REDIS_HOST);
     match RedisClient::open(redis_url) {
       Ok(mut c) => {
         if c.check_connection() {
